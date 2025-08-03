@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import PatientInfo from './components/PatientInfo';
 import FavoriteFoods from './components/FavoriteFoods';
+import DislikedFoods from './components/DislikedFoods';
 
 
 type PatientInfo = {
@@ -19,6 +20,12 @@ type FoodItem = {
   name: string;
 };
 
+type DislikedFood = {
+  id: string;
+  name: string;
+  severity: 'mild' | 'strong';
+};
+
 function App() {
   const [patientInfo, setPatientInfo] = useState<PatientInfo>({
     name: '',
@@ -29,6 +36,8 @@ function App() {
   });
 
     const [favoriteFoods, setFavoriteFoods] = useState<FoodItem[]>([]);
+    const [dislikedFoods, setDislikedFoods] = useState<DislikedFood[]>([]);
+
 
 
   return (
@@ -45,6 +54,11 @@ function App() {
           <FavoriteFoods
             favoriteFoods={favoriteFoods}
             setFavoriteFoods={setFavoriteFoods}
+          />
+
+          <DislikedFoods 
+            dislikedFoods={dislikedFoods} 
+            setDislikedFoods={setDislikedFoods} 
           />
       </div>
       </main>
