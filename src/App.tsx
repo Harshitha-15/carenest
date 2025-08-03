@@ -6,7 +6,6 @@ import PatientInfo from './components/PatientInfo';
 import FavoriteFoods from './components/FavoriteFoods';
 
 
-
 type PatientInfo = {
   name: string;
   age: string;
