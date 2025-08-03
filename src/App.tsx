@@ -8,7 +8,8 @@ import FavoriteFoods from './components/FavoriteFoods';
 import DislikedFoods from './components/DislikedFoods';
 import AdditionalNotes from './components/AdditionalNotes';
 import Allergies from './components/Allergies';
-
+import SummaryPanel from './components/SummaryPanel';
+import SaveProfile from './components/SaveProfile';
 
 type PatientInfo = {
   name: string;
@@ -81,6 +82,20 @@ function App() {
            <AdditionalNotes
             additionalNotes={additionalNotes}
             setAdditionalNotes={setAdditionalNotes}
+          />
+
+                    <SaveProfile
+            patientInfo={patientInfo}
+            favoriteFoods={favoriteFoods}
+            dislikedFoods={dislikedFoods}
+            allergies={allergies}
+            additionalNotes={additionalNotes}
+          />
+
+          <SummaryPanel
+            favoriteFoods={favoriteFoods}
+            dislikedFoods={dislikedFoods}
+            allergies={allergies}
           />
       </div>
       </main>
