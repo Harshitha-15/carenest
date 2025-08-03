@@ -1,13 +1,10 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Header from './components/Header'
+import { useState } from 'react';
+import Header from './components/Header';
 import PatientInfo from './components/PatientInfo';
 import FavoriteFoods from './components/FavoriteFoods';
 import DislikedFoods from './components/DislikedFoods';
-import AdditionalNotes from './components/AdditionalNotes';
 import Allergies from './components/Allergies';
+import AdditionalNotes from './components/AdditionalNotes';
 import SummaryPanel from './components/SummaryPanel';
 import SaveProfile from './components/SaveProfile';
 
@@ -24,17 +21,16 @@ type FoodItem = {
   name: string;
 };
 
-type Allergy = {
-  id: string;
-  name: string;
-  severity: 'mild' | 'severe';
-};
-
-
 type DislikedFood = {
   id: string;
   name: string;
   severity: 'mild' | 'strong';
+};
+
+type Allergy = {
+  id: string;
+  name: string;
+  severity: 'mild' | 'severe';
 };
 
 function App() {
@@ -45,16 +41,13 @@ function App() {
     relationship: '',
     medicalConditions: ''
   });
-
-    const [favoriteFoods, setFavoriteFoods] = useState<FoodItem[]>([]);
-    const [dislikedFoods, setDislikedFoods] = useState<DislikedFood[]>([]);
-    const [allergies, setAllergies] = useState<Allergy[]>([]);
-    const [additionalNotes, setAdditionalNotes] = useState('');
-
-
+  const [favoriteFoods, setFavoriteFoods] = useState<FoodItem[]>([]);
+  const [dislikedFoods, setDislikedFoods] = useState<DislikedFood[]>([]);
+  const [allergies, setAllergies] = useState<Allergy[]>([]);
+  const [additionalNotes, setAdditionalNotes] = useState('');
 
   return (
-      <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50">
       <main className="container mx-auto px-4 py-8 max-w-4xl" role="main">
         <Header />
 
@@ -63,7 +56,7 @@ function App() {
             patientInfo={patientInfo}
             setPatientInfo={setPatientInfo}
           />
-          
+
           <FavoriteFoods
             favoriteFoods={favoriteFoods}
             setFavoriteFoods={setFavoriteFoods}
@@ -79,12 +72,12 @@ function App() {
             setAllergies={setAllergies} 
           />
 
-           <AdditionalNotes
+          <AdditionalNotes
             additionalNotes={additionalNotes}
             setAdditionalNotes={setAdditionalNotes}
           />
 
-                    <SaveProfile
+          <SaveProfile
             patientInfo={patientInfo}
             favoriteFoods={favoriteFoods}
             dislikedFoods={dislikedFoods}
@@ -97,10 +90,10 @@ function App() {
             dislikedFoods={dislikedFoods}
             allergies={allergies}
           />
-      </div>
+        </div>
       </main>
-      </div>
+    </div>
   );
 }
 
-export default App
+export default App;
