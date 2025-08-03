@@ -6,6 +6,7 @@ import Header from './components/Header'
 import PatientInfo from './components/PatientInfo';
 import FavoriteFoods from './components/FavoriteFoods';
 import DislikedFoods from './components/DislikedFoods';
+import AdditionalNotes from './components/AdditionalNotes'
 
 
 type PatientInfo = {
@@ -38,6 +39,7 @@ function App() {
 
     const [favoriteFoods, setFavoriteFoods] = useState<FoodItem[]>([]);
     const [dislikedFoods, setDislikedFoods] = useState<DislikedFood[]>([]);
+    const [additionalNotes, setAdditionalNotes] = useState('');
 
 
 
@@ -60,6 +62,11 @@ function App() {
           <DislikedFoods 
             dislikedFoods={dislikedFoods} 
             setDislikedFoods={setDislikedFoods} 
+          />
+
+           <AdditionalNotes
+            additionalNotes={additionalNotes}
+            setAdditionalNotes={setAdditionalNotes}
           />
       </div>
       </main>
