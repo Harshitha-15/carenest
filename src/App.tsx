@@ -2,8 +2,8 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import PatientInfo from './components/PatientInfo'
-
+import PatientInfo from './components/PatientInfo';
+import FavoriteFoods from './components/FavoriteFoods';
 
 
 
@@ -15,6 +15,11 @@ type PatientInfo = {
   medicalConditions: string;
 };
 
+type FoodItem = {
+  id: string;
+  name: string;
+};
+
 function App() {
   const [patientInfo, setPatientInfo] = useState<PatientInfo>({
     name: '',
@@ -23,6 +28,9 @@ function App() {
     relationship: '',
     medicalConditions: ''
   });
+
+    const [favoriteFoods, setFavoriteFoods] = useState<FoodItem[]>([]);
+
 
   return (
       <div className="min-h-screen bg-gray-50">
@@ -33,6 +41,11 @@ function App() {
           <PatientInfo
             patientInfo={patientInfo}
             setPatientInfo={setPatientInfo}
+          />
+          
+          <FavoriteFoods
+            favoriteFoods={favoriteFoods}
+            setFavoriteFoods={setFavoriteFoods}
           />
       </div>
       </main>
