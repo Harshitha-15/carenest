@@ -2,6 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import Header from './components/Header'
 import PatientInfo from './components/PatientInfo';
 import FavoriteFoods from './components/FavoriteFoods';
 import DislikedFoods from './components/DislikedFoods';
@@ -43,7 +44,7 @@ function App() {
   return (
       <div className="min-h-screen bg-gray-50">
       <main className="container mx-auto px-4 py-8 max-w-4xl" role="main">
-        
+        <Header />
 
         <div className="grid gap-8">
           <PatientInfo
