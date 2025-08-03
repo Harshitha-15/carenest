@@ -6,7 +6,8 @@ import Header from './components/Header'
 import PatientInfo from './components/PatientInfo';
 import FavoriteFoods from './components/FavoriteFoods';
 import DislikedFoods from './components/DislikedFoods';
-import AdditionalNotes from './components/AdditionalNotes'
+import AdditionalNotes from './components/AdditionalNotes';
+import Allergies from './components/Allergies';
 
 
 type PatientInfo = {
@@ -21,6 +22,13 @@ type FoodItem = {
   id: string;
   name: string;
 };
+
+type Allergy = {
+  id: string;
+  name: string;
+  severity: 'mild' | 'severe';
+};
+
 
 type DislikedFood = {
   id: string;
@@ -39,6 +47,7 @@ function App() {
 
     const [favoriteFoods, setFavoriteFoods] = useState<FoodItem[]>([]);
     const [dislikedFoods, setDislikedFoods] = useState<DislikedFood[]>([]);
+    const [allergies, setAllergies] = useState<Allergy[]>([]);
     const [additionalNotes, setAdditionalNotes] = useState('');
 
 
@@ -62,6 +71,11 @@ function App() {
           <DislikedFoods 
             dislikedFoods={dislikedFoods} 
             setDislikedFoods={setDislikedFoods} 
+          />
+
+          <Allergies 
+            allergies={allergies} 
+            setAllergies={setAllergies} 
           />
 
            <AdditionalNotes
