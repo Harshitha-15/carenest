@@ -44,14 +44,6 @@ export default function Allergies({ allergies, setAllergies }: Props) {
     setAllergies(allergies.filter(allergy => allergy.id !== id));
   };
 
-  const getSeverityClasses = (severity: string) => {
-    switch (severity) {
-      case 'severe': return 'bg-red-500 text-white';
-      case 'mild': return 'bg-yellow-500 text-white';
-      default: return 'bg-gray-200 text-gray-800';
-    }
-  };
-
   return (
     <div className="bg-white border border-gray-200 rounded-lg shadow-sm border-l-4 border-l-red-500">
       <div className="p-6">
