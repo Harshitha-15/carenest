@@ -12,10 +12,21 @@ type Props = {
   setAllergies: React.Dispatch<React.SetStateAction<Allergy[]>>;
 };
 
+const COMMON_ALLERGIES = ['Nuts', 'Dairy', 'Gluten', 'Eggs', 'Shellfish', 'Soy', 'Fish', 'Sesame'];
 
 export default function Allergies({ allergies, setAllergies }: Props) {
   const [customAllergy, setCustomAllergy] = useState('');
   const [customSeverity, setCustomSeverity] = useState<'mild' | 'severe'>('mild');
+
+  const addAllergy = (allergen: string, severity: 'mild' | 'severe') => {
+    if (!allergies.find(a => a.name === allergen)) {
+      setAllergies([...allergies, {
+        id: Date.now().toString(),
+        name: allergen,
+        severity
+      }]);
+    }
+  };
 
   const addCustomAllergy = () => {
     if (customAllergy.trim() && !allergies.find(a => a.name.toLowerCase() === customAllergy.toLowerCase())) {
@@ -29,6 +40,17 @@ export default function Allergies({ allergies, setAllergies }: Props) {
     }
   };
 
+  const removeAllergy = (id: string) => {
+    setAllergies(allergies.filter(allergy => allergy.id !== id));
+  };
+
+  const getSeverityClasses = (severity: string) => {
+    switch (severity) {
+      case 'severe': return 'bg-red-500 text-white';
+      case 'mild': return 'bg-yellow-500 text-white';
+      default: return 'bg-gray-200 text-gray-800';
+    }
+  };
 
   return (
     <div className="bg-white border border-gray-200 rounded-lg shadow-sm border-l-4 border-l-red-500">
@@ -51,6 +73,38 @@ export default function Allergies({ allergies, setAllergies }: Props) {
                   Please ensure all allergies and intolerances are accurately reported. This information is essential for safe meal preparation.
                 </p>
               </div>
+            </div>
+          </div>
+
+          <div>
+            <h4 className="font-medium mb-3">Common Allergies & Intolerances:</h4>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
+              {COMMON_ALLERGIES.map((allergen) => (
+                <button
+                  key={allergen}
+                  className="px-3 py-2 text-sm border border-gray-300 rounded-md hover:bg-red-50 hover:border-red-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-100"
+                  onClick={() => addAllergy(allergen, customSeverity)}
+                  disabled={allergies.some(a => a.name === allergen)}
+                >
+                  {allergen}
+                </button>
+              ))}
+            </div>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Severity for common allergies:
+              </label>
+              <select
+                value={customSeverity}
+                onChange={(e) => setCustomSeverity(e.target.value as 'mild' | 'severe')}
+                className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+              >
+                <option value="mild">Mild</option>
+                <option value="severe">Severe</option>
+              </select>
+              <p className="text-xs text-gray-500 mt-1">
+                Select severity level, then click on allergies above to add them.
+              </p>
             </div>
           </div>
 
@@ -96,6 +150,15 @@ export default function Allergies({ allergies, setAllergies }: Props) {
                     <span className="ml-1 text-xs opacity-75">
                       ({allergy.severity})
                     </span>
+                    <button
+                      onClick={() => removeAllergy(allergy.id)}
+                      className={`ml-2 inline-flex items-center justify-center w-4 h-4 ${
+                        allergy.severity === 'severe' ? 'text-red-200 hover:text-white' : 'text-yellow-600 hover:text-yellow-800'
+                      }`}
+                      aria-label={`Remove ${allergy.name} allergy`}
+                    >
+                      <X className="w-3 h-3" />
+                    </button>
                   </span>
                 ))}
               </div>
